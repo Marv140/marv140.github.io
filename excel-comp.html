@@ -4,8 +4,10 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Excel File Comparator</title>
-  <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="32x32"/>
+  <!-- 0) Configure Tailwind to use .dark class -->
   <script>tailwind.config = { darkMode: 'class' }</script>
+  <!-- 1) Set initial theme BEFORE loading Tailwind -->
   <script>
     (function() {
       const stored = localStorage.getItem('theme');
@@ -14,24 +16,24 @@
       document.documentElement.classList.toggle('dark', dark);
     })();
   </script>
+  <!-- 2) Load Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="32x32"/>
+  <!-- 3) Load SheetJS -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 <body class="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
   <div class="flex-1 flex flex-col items-center justify-center p-4">
     <h1 class="text-4xl font-bold mb-8">Compare Two Excel Files</h1>
     <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg w-full max-w-md">
-      <form method="post" enctype="multipart/form-data">
+      <form id="compareForm">
         <label for="file1" class="block font-semibold mb-2">Upload File 1:</label>
         <input type="file"
-               name="file1"
                id="file1"
                accept=".xlsx"
                required
                class="block w-full mb-4 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-700"/>
         <label for="file2" class="block font-semibold mb-2">Upload File 2:</label>
         <input type="file"
-               name="file2"
                id="file2"
                accept=".xlsx"
                required
@@ -41,31 +43,26 @@
           Compare Files
         </button>
       </form>
-      {% if success %}
-      <div class="mt-6 text-center">
-        <h3 class="text-xl font-semibold mb-4">Download Results</h3>
-        <a href="/download/common.xlsx"
-           class="inline-block bg-green-500 hover:bg-green-400 text-white py-2 px-4 rounded mb-2 transition">
+      <div id="results" class="hidden mt-6 text-center space-y-4">
+        <a id="commonLink"
+           class="block bg-green-500 hover:bg-green-400 text-white py-2 px-4 rounded transition"
+           download="common.xlsx">
           Common Rows
         </a>
-        <a href="/download/only_in_file1.xlsx"
-           class="inline-block bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded mb-2 transition">
+        <a id="only1Link"
+           class="block bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded transition"
+           download="only_in_file1.xlsx">
           Only in File 1
         </a>
-        <a href="/download/only_in_file2.xlsx"
-           class="inline-block bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded mb-2 transition">
+        <a id="only2Link"
+           class="block bg-blue-500 hover:bg-blue-400 text-white py-2 px-4 rounded transition"
+           download="only_in_file2.xlsx">
           Only in File 2
         </a>
-        <form action="/delete_results" method="post" class="mt-4">
-          <button type="submit"
-                  class="bg-red-600 hover:bg-red-500 text-white py-2 px-4 rounded transition">
-            Delete Results
-          </button>
-        </form>
       </div>
-      {% endif %}
     </div>
   </div>
+  <script src="js/excel-comp.js"></script>
   <footer class="text-center py-6 text-gray-500">
     &copy; 2025 Marv140. All rights reserved.
   </footer>
