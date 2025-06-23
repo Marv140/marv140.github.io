@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Konvertor JPG/PNG na WEBP</title>
+  <!-- 0) Configure Tailwind to use .dark class -->
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <!-- 1) Set initial theme BEFORE loading Tailwind -->
+  <script>
+    (function() {
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const dark = stored === 'dark' || (!stored && prefersDark);
+      document.documentElement.classList.toggle('dark', dark);
+    })();
+  </script>
+  <!-- 2) Load Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="32x32"/>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+    <h1 class="text-4xl font-bold mb-8">🖼️ Převod obrázku do formátu WEBP</h1>
+    <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg w-full max-w-md">
+      <form id="uploadForm">
+        <label for="imageInput" class="block font-semibold mb-2">Vyber obrázek (JPG nebo PNG):</label>
+        <input type="file"
+               id="imageInput"
+               accept="image/png, image/jpeg"
+               required
+               class="block w-full mb-4 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-700"/>
+        <button type="submit"
+                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded transition">
+          Převést na WEBP
+        </button>
+      </form>
+      <div id="downloadSection" class="hidden text-center mt-6">
+        <a id="downloadLink"
+           href="#"
+           download="converted.webp"
+           class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-4 rounded transition">
+          📥 Stáhnout obrázek
+        </a>
+      </div>
+      <p id="status" class="mt-4 text-center"></p>
+    </div>
+  </div>
+  <script src="js/file-comp.js"></script>
+</body>
+</html>
