@@ -37,10 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // pick a random unused index
-    const remaining = QUESTIONS.map((_,i)=>i).filter(i=>!used.includes(i));
-    currentIdx = remaining[Math.floor(Math.random()*remaining.length)];
-    used.push(currentIdx);
-    sessionStorage.setItem('usedQuestions', JSON.stringify(used));
+    const remaining = QUESTIONS
+      .map((_,i) => i)
+      .filter(i => !used.includes(i));
+    currentIdx = remaining[Math.floor(Math.random() * remaining.length)];
 
     // render
     const q = QUESTIONS[currentIdx];
@@ -92,12 +92,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Submit the selected answer
   function submitAnswer(selectedLanguage, correctLanguage) {
-    // Hide options and disable
     optionsContainer.style.display = "none";
     disableAllButtons();
-    // Local check
+
     const isCorrect = selectedLanguage === correctLanguage;
     if (isCorrect) {
+      // only now mark this question as used
+      used.push(currentIdx);
+      sessionStorage.setItem('usedQuestions', JSON.stringify(used));
+
       resultText.textContent = "Správně!";
       resultText.className = "correct";
       nextButton.textContent = "Další";
@@ -106,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       resultText.textContent = "Špatně... Zkus to znovu.";
       resultText.className = "incorrect";
       nextButton.textContent = "Zkusit Znovu";
-      nextButton.onclick = function() {
+      nextButton.onclick = () => {
         createOptionButtons(correctLanguage);
         resultText.textContent = "";
         resultText.className = "";
@@ -148,8 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error resetting quiz:", error);
     }
   }
-
-  nextButton.addEventListener("click", loadQuestion);
 
   // Start the quiz
   loadQuestion();
