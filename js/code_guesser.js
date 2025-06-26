@@ -91,42 +91,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Submit the selected answer
-  async function submitAnswer(selectedLanguage, correctLanguage) {
-    try {
-      const response = await fetch("/submit-answer", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          language: selectedLanguage,
-          correct_language: correctLanguage,
-        }),
-      });
-      const data = await response.json();
-
-      if (data.result === "correct") {
-        resultText.textContent = "Správně!";
-        resultText.className = "correct";
-        nextButton.textContent = "Další";
-        nextButton.onclick = loadQuestion;
-      } else {
-        resultText.textContent = "Špatně... Zkus to znovu.";
-        resultText.className = "incorrect";
-        nextButton.textContent = "Zkusit Znovu";
-        nextButton.onclick = () => {
-          createOptionButtons(correctLanguage); // Recreate shuffled options
-          resultText.textContent = "";
-          resultText.className = "";
-          nextButton.style.display = "none";
-          optionsContainer.style.display = "flex"; // Show options again
-        };
-      }
-
-      nextButton.style.display = "inline-block";
-    } catch (error) {
-      console.error("Error submitting answer:", error);
-      resultText.textContent = "Chyba při odesílání odpovědi.";
+  function submitAnswer(selectedLanguage, correctLanguage) {
+    // Hide options and disable
+    optionsContainer.style.display = "none";
+    disableAllButtons();
+    // Local check
+    const isCorrect = selectedLanguage === correctLanguage;
+    if (isCorrect) {
+      resultText.textContent = "Správně!";
+      resultText.className = "correct";
+      nextButton.textContent = "Další";
+      nextButton.onclick = loadQuestion;
+    } else {
+      resultText.textContent = "Špatně... Zkus to znovu.";
       resultText.className = "incorrect";
+      nextButton.textContent = "Zkusit Znovu";
+      nextButton.onclick = function() {
+        createOptionButtons(correctLanguage);
+        resultText.textContent = "";
+        resultText.className = "";
+        nextButton.style.display = "none";
+        optionsContainer.style.display = "flex";
+      };
     }
+    nextButton.style.display = "inline-block";
   }
 
   // Handle the end of the quiz
