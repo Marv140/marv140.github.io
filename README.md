@@ -1,5 +1,5 @@
 # Marv140 - Projects
 
-Basic site with my projects I´ve done in my freetime and they are useful for me.
+A collection of personal projects I've developed in my free time, showcasing useful tools and solutions.
 
 Website accesible on https://marv140.github.io
