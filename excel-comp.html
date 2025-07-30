@@ -21,9 +21,19 @@
   <!-- 3) Load SheetJS -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
+
 <body class="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
   <div class="flex-1 flex flex-col items-center justify-center p-4">
-    <h1 class="text-4xl font-bold mb-8">Compare Two Excel Files</h1>
+    <!-- Header with back arrow -->
+    <div class="w-full max-w-md mb-8 flex items-center gap-4">
+      <a href="https://marv140.github.io/index.html" class="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex-shrink-0 flex items-center mt-1" title="Zpět na hlavní stránku">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+      </a>
+      <h1 class="text-3xl sm:text-4xl font-bold whitespace-nowrap leading-none">Compare Two Excel Files</h1>
+    </div>
+    
     <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg w-full max-w-md">
       <form id="compareForm">
         <label for="file1" class="block font-semibold mb-2">Upload File 1:</label>
