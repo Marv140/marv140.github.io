@@ -1217,7 +1217,7 @@ function exportovat() {
   
   // Použijeme lokální čas pro export
   const exportTime = new Date();
-  obsah += `\nExportováno: ${exportTime.toLocaleString('cs-CZ')} (${Intl.DateTimeFormat().resolvedOptions().timeZone})\n`;
+  obsah += `\nExportováno: ${exportTime.toLocaleString('cs-CZ')} (${Intl.DateTimeFormat().resolvedOptions().timeZone})\n© 2025 Marv140 - Software accessible at https://marv140.github.io/\n`;
 
   const blob = new Blob([obsah], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
