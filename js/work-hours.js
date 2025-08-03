@@ -109,7 +109,7 @@ async function ulozitDataDoCloudu() {
     console.error('Error message:', error.message);
     
     if (error.code === 'permission-denied') {
-      zobrazitNotifikaci('Nemáte oprávnění k ukládání dat. Zkontrolujte Firestore pravidla.', 'error', 5000);
+      zobrazitNotifikaci('Nemáte oprávnění k ukládání dat, zkontrolujte Firestore pravidla', 'error', 5000);
     } else {
       zobrazitNotifikaci('Chyba při ukládání do cloudu: ' + error.message, 'error', 5000);
     }
@@ -165,7 +165,7 @@ function pridatZaznam() {
   const doValue = document.getElementById("do").value;
 
   if (!od || !doValue) {
-    zobrazitNotifikaci("Vyplňte prosím oba časy.", 'warning');
+    zobrazitNotifikaci("Vyplňte prosím oba časy", 'warning');
     return;
   }
 
@@ -173,7 +173,7 @@ function pridatZaznam() {
   const doDate = localStringToDate(doValue);
 
   if (doDate <= odDate) {
-    zobrazitNotifikaci("Čas 'Do' musí být později než čas 'Od'.", 'error');
+    zobrazitNotifikaci('Čas "Do" musí být později než čas "Od"', 'error');
     return;
   }
 
@@ -328,7 +328,7 @@ function filtrujZaznamy() {
 function nastavitLimit() {
   const novyLimit = parseFloat(document.getElementById("limit").value);
   if (isNaN(novyLimit) || novyLimit < 0) {
-    zobrazitNotifikaci("Zadejte platný limit hodin.", 'warning');
+    zobrazitNotifikaci("Zadejte platný limit hodin", 'warning');
     return;
   }
   limitHodin = novyLimit;
@@ -341,7 +341,7 @@ function nastavitLimit() {
 function aplikovatFiltr() {
   aktualniFiltr = document.getElementById("filtrMesic").value;
   if (!aktualniFiltr) {
-    zobrazitNotifikaci("Vyberte měsíc pro filtrování.", 'warning');
+    zobrazitNotifikaci("Vyberte měsíc pro filtrování", 'warning');
     return;
   }
   universalSave();
@@ -361,7 +361,7 @@ function zrusitFiltr() {
 // Export to TXT - improved format with correct timezone
 function exportovat() {
   if (zaznamy.length === 0) {
-    zobrazitNotifikaci("Žádné záznamy k exportu.", 'warning');
+    zobrazitNotifikaci("Žádné záznamy k exportu", 'warning');
     return;
   }
 
@@ -524,7 +524,7 @@ function importovat(input) {
     }
 
     if (importovaneZaznamy.length === 0) {
-      zobrazitNotifikaci("V souboru nebyly nalezeny žádné platné záznamy.", 'error', 5000);
+      zobrazitNotifikaci("V souboru nebyly nalezeny žádné platné záznamy", 'error', 5000);
       return;
     }
 
@@ -555,7 +555,7 @@ function importovat(input) {
     if (textElement) {
       textElement.textContent = 'Vyberte soubor...';
     }
-    zobrazitNotifikaci('Chyba při čtení souboru. Zkuste to znovu.', 'error');
+    zobrazitNotifikaci('Chyba při čtení souboru, zkuste to znovu', 'error');
   };
   
   reader.readAsText(file, 'utf-8');
@@ -621,7 +621,7 @@ function ulozitUpravy(index) {
   const doValue = doInput.value;
   
   if (!od || !doValue) {
-    zobrazitNotifikaci("Vyplňte prosím oba časy.", 'warning');
+    zobrazitNotifikaci("Vyplňte prosím oba časy", 'warning');
     return;
   }
   
@@ -629,7 +629,7 @@ function ulozitUpravy(index) {
   const doDate = localStringToDate(doValue);
   
   if (doDate <= odDate) {
-    zobrazitNotifikaci("Čas 'Do' musí být později než čas 'Od'.", 'error');
+    zobrazitNotifikaci('Čas "Do" musí být později než čas "Od"', 'error');
     return;
   }
   
@@ -778,7 +778,7 @@ function vykresliGraf(poDnech) {
 
 function exportGraf() {
   if (!graf) {
-    zobrazitNotifikaci("Graf není k dispozici.", 'warning');
+    zobrazitNotifikaci("Graf není k dispozici", 'warning');
     return;
   }
 
@@ -788,14 +788,14 @@ function exportGraf() {
   a.download = "graf_hodin.png";
   a.click();
   
-  zobrazitNotifikaci("Graf byl exportován jako obrázek.", 'success');
+  zobrazitNotifikaci("Graf byl exportován jako obrázek", 'success');
 }
 
 // Test Firebase connection
 async function testFirebaseConnection() {
   if (!currentUser) {
     console.log('Musíte se nejdříve přihlásit');
-    zobrazitNotifikaci("Musíte se nejdříve přihlásit pro test Firebase připojení.", "warning");
+    zobrazitNotifikaci("Musíte se nejdříve přihlásit pro test Firebase připojení", "warning");
     return;
   }
   
@@ -820,7 +820,7 @@ async function testFirebaseConnection() {
     }, { merge: true });
     console.log('Test workHours kolekce úspěšný!');
     
-    zobrazitNotifikaci('Firebase test úspěšný! Všechno funguje správně.', 'success', 5000);
+    zobrazitNotifikaci('Firebase test úspěšný! Všechno funguje správně', 'success', 5000);
     
   } catch (error) {
     console.error('Test neúspěšný:', error);
@@ -828,9 +828,9 @@ async function testFirebaseConnection() {
     console.error('Error message:', error.message);
     
     if (error.code === 'permission-denied') {
-      zobrazitNotifikaci('Chyba oprávnění: Zkontrolujte Firestore Security Rules v Firebase Console.', 'error', 6000);
+      zobrazitNotifikaci('Chyba oprávnění: Zkontrolujte Firestore Security Rules v Firebase Console', 'error', 6000);
     } else if (error.code === 'unauthenticated') {
-      zobrazitNotifikaci('Uživatel není přihlášený. Přihlaste se prosím znovu.', 'error', 5000);
+      zobrazitNotifikaci('Uživatel není přihlášený, přihlaste se prosím znovu', 'error', 5000);
     } else {
       zobrazitNotifikaci(`Chyba Firebase: ${error.message}`, 'error', 5000);
     }
@@ -846,7 +846,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Show delete all popup
 function zobrazitSmazatVsechnyPopup() {
   if (zaznamy.length === 0) {
-    zobrazitNotifikaci("Žádné záznamy ke smazání.", "error");
+    zobrazitNotifikaci("Žádné záznamy ke smazání", "error");
     return;
   }
 
@@ -1118,7 +1118,7 @@ function pridatZaznam() {
   const doValue = document.getElementById("do").value;
 
   if (!od || !doValue) {
-    zobrazitNotifikaci("Vyplňte prosím oba časy.", 'warning');
+    zobrazitNotifikaci("Vyplňte prosím oba časy", 'warning');
     return;
   }
 
@@ -1126,7 +1126,7 @@ function pridatZaznam() {
   const doDate = localStringToDate(doValue);
 
   if (doDate <= odDate) {
-    zobrazitNotifikaci("Čas 'Do' musí být později než čas 'Od'.", 'error');
+    zobrazitNotifikaci('Čas "Do" musí být později než čas "Od"', 'error');
     return;
   }
 
@@ -1152,7 +1152,7 @@ function pridatZaznam() {
 function nastavitLimit() {
   const novyLimit = parseFloat(document.getElementById("limit").value);
   if (isNaN(novyLimit) || novyLimit < 0) {
-    zobrazitNotifikaci("Zadejte platný limit hodin.", 'warning');
+    zobrazitNotifikaci("Zadejte platný limit hodin", 'warning');
     return;
   }
   limitHodin = novyLimit;
@@ -1164,7 +1164,7 @@ function nastavitLimit() {
 function aplikovatFiltr() {
   aktualniFiltr = document.getElementById("filtrMesic").value;
   if (!aktualniFiltr) {
-    zobrazitNotifikaci("Vyberte měsíc pro filtrování.", 'warning');
+    zobrazitNotifikaci("Vyberte měsíc pro filtrování", 'warning');
     return;
   }
   universalSave();
@@ -1182,7 +1182,7 @@ function zrusitFiltr() {
 
 function exportovat() {
   if (zaznamy.length === 0) {
-    zobrazitNotifikaci("Žádné záznamy k exportu.", 'warning');
+    zobrazitNotifikaci("Žádné záznamy k exportu", 'warning');
     return;
   }
 
@@ -1345,7 +1345,7 @@ function importovat(input) {
     }
 
     if (importovaneZaznamy.length === 0) {
-      zobrazitNotifikaci("V souboru nebyly nalezeny žádné platné záznamy.", 'error', 5000);
+      zobrazitNotifikaci("V souboru nebyly nalezeny žádné platné záznamy", 'error', 5000);
       return;
     }
 
@@ -1375,7 +1375,7 @@ function importovat(input) {
     if (textElement) {
       textElement.textContent = 'Vyberte soubor...';
     }
-    zobrazitNotifikaci('Chyba při čtení souboru. Zkuste to znovu.', 'error');
+    zobrazitNotifikaci('Chyba při čtení souboru, zkuste to znovu', 'error');
   };
   
   reader.readAsText(file, 'utf-8');
@@ -1417,3 +1417,468 @@ function pouzitSejneDatum() {
   console.log('Použito datum z pole "Od":', rokMesicDen);
   zobrazitNotifikaci(`Datum zkopírováno: ${rokMesicDen}`, 'info');
 }
+
+let hodinovaSazba = 0;
+let danoveZatizeni = 21;
+
+async function nastavitSazbu() {
+  const sazbaInput = document.getElementById('hodinovaSazba');
+  const danInput = document.getElementById('danoveZatizeni');
+  
+  const novaSazba = parseFloat(sazbaInput.value) || 0;
+  const novaDan = parseFloat(danInput.value) || 21;
+  
+  // Validace
+  if (novaSazba < 0) {
+    zobrazitNotifikaci('Hodinová sazba nemůže být záporná.', 'error');
+    return;
+  }
+  
+  if (novaDan < 0 || novaDan > 100) {
+    zobrazitNotifikaci('Daňové zatížení musí být mezi 0 a 100%', 'error');
+    return;
+  }
+  
+  hodinovaSazba = novaSazba;
+  danoveZatizeni = novaDan;
+  
+  // Uložení do Firebase - použij set s merge: true
+  if (currentUser) {
+    try {
+      await db.collection('users').doc(currentUser.uid).set({
+        hodinovaSazba: hodinovaSazba,
+        danoveZatizeni: danoveZatizeni,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+      console.log('Sazba uložena do cloudu');
+    } catch (error) {
+      console.error('Chyba při ukládání sazby:', error);
+      zobrazitNotifikaci('Chyba při ukládání do cloudu, data uložena lokálně', 'warning');
+    }
+  }
+  
+  // Záložní uložení do localStorage
+  localStorage.setItem('hodinovaSazba', hodinovaSazba.toString());
+  localStorage.setItem('danoveZatizeni', danoveZatizeni.toString());
+  
+  updateVydelekDisplay();
+  zobrazitNotifikaci(`Sazba nastavena: ${hodinovaSazba} Kč/hod, daň ${danoveZatizeni}%`, 'success');
+}
+
+function updateVydelekDisplay() {
+  // Počítej pouze z aktuálně zobrazených (filtrovaných) záznamů
+  const data = filtrujZaznamy();
+  
+  const celkemMinut = data.reduce((sum, zaznam) => {
+    let odDate, doDate;
+    
+    // Správné parsování podle formátu
+    if (zaznam.odRaw.includes('Z') || zaznam.odRaw.includes('+')) {
+      // UTC formát (starší záznamy)
+      odDate = new Date(zaznam.odRaw);
+      doDate = new Date(zaznam.doRaw);
+    } else {
+      // Lokální formát
+      odDate = localStringToDate(zaznam.odRaw);
+      doDate = localStringToDate(zaznam.doRaw);
+    }
+    
+    return sum + (doDate - odDate) / (1000 * 60);
+  }, 0);
+  
+  const celkemHodin = celkemMinut / 60;
+  const hruby = celkemHodin * hodinovaSazba;
+  const cisty = hruby * (1 - danoveZatizeni / 100);
+  
+  // Bezpečná aktualizace DOM elementů
+  updateElementSafely('hrubyVydelek', `${Math.round(hruby)} Kč`);
+  updateElementSafely('cistyVydelek', `${Math.round(cisty)} Kč`);
+  updateElementSafely('aktualniSazba', `${hodinovaSazba} Kč/hod`);
+  updateElementSafely('celkemHodinVydelek', `${celkemHodin.toFixed(1)} hod`);
+  updateElementSafely('aktualniDan', `${danoveZatizeni}%`);
+
+  console.log(`Výdělek: ${celkemHodin.toFixed(1)}h × ${hodinovaSazba}Kč/h = ${Math.round(hruby)}Kč hrubý, ${Math.round(cisty)}Kč čistý`);
+}
+
+function updateElementSafely(id, text) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = text;
+  }
+}
+
+async function loadUserSettings() {
+  if (!currentUser) return;
+  
+  try {
+    const doc = await db.collection('users').doc(currentUser.uid).get();
+    if (doc.exists) {
+      const data = doc.data();
+      
+      // Načtení sazby a daně
+      if (data.hodinovaSazba !== undefined) {
+        hodinovaSazba = data.hodinovaSazba;
+        updateElementSafely('hodinovaSazba', '');
+        const sazbaInput = document.getElementById('hodinovaSazba');
+        if (sazbaInput) sazbaInput.value = hodinovaSazba;
+      }
+      
+      if (data.danoveZatizeni !== undefined) {
+        danoveZatizeni = data.danoveZatizeni;
+        const danInput = document.getElementById('danoveZatizeni');
+        if (danInput) danInput.value = danoveZatizeni;
+      }
+      
+      // Načtení limitu
+      if (data.limit !== undefined) {
+        limitHodin = data.limit;
+        const limitInput = document.getElementById('limit');
+        if (limitInput) limitInput.value = limitHodin;
+      }
+      
+      console.log(`Nastavení načteno: ${hodinovaSazba} Kč/h, ${danoveZatizeni}% daň, ${limitHodin}h limit`);
+    }
+  } catch (error) {
+    console.error('Cloud nedostupný, načítám z localStorage:', error);
+    
+    // Fallback na localStorage
+    const savedSazba = localStorage.getItem('hodinovaSazba');
+    const savedDan = localStorage.getItem('danoveZatizeni');
+    
+    if (savedSazba) {
+      hodinovaSazba = parseFloat(savedSazba);
+      const sazbaInput = document.getElementById('hodinovaSazba');
+      if (sazbaInput) sazbaInput.value = hodinovaSazba;
+    }
+    
+    if (savedDan) {
+      danoveZatizeni = parseFloat(savedDan);
+      const danInput = document.getElementById('danoveZatizeni');
+      if (danInput) danInput.value = danoveZatizeni;
+    }
+  }
+  
+  // Vždy aktualizuj výdělek po načtení
+  updateVydelekDisplay();
+}
+
+const originalAktualizovatZobrazeni = aktualizovatZobrazeni;
+aktualizovatZobrazeni = function() {
+  originalAktualizovatZobrazeni.call(this);
+  // Přidej výpočet výdělku na konec
+  updateVydelekDisplay();
+};
+
+// Upravená verze nastavitLimit - přidá ukládání do cloudu
+const originalNastavitLimit = nastavitLimit;
+nastavitLimit = async function() {
+  const novyLimit = parseFloat(document.getElementById("limit").value);
+  if (isNaN(novyLimit) || novyLimit < 0) {
+    zobrazitNotifikaci("Zadejte platný limit hodin", 'warning');
+    return;
+  }
+  
+  limitHodin = novyLimit;
+  
+  // Ukládání do cloudu
+  if (currentUser) {
+    try {
+      await db.collection('users').doc(currentUser.uid).update({
+        limit: limitHodin
+      });
+      console.log('Limit uložen do cloudu');
+    } catch (error) {
+      console.error('Chyba při ukládání limitu:', error);
+    }
+  }
+  
+  universalSave();
+  aktualizovatZobrazeni(); // Toto už zavolá updateVydelekDisplay
+  zobrazitNotifikaci(`Limit nastaven na ${formatHHMM(limitHodin)} hodin`, 'success');
+};
+
+// Upravená verze nactiDataZCloudu - přidá načítání nastavení
+const originalNactiDataZCloudu = nactiDataZCloudu;
+nactiDataZCloudu = async function() {
+  if (!currentUser) {
+    console.log('Uživatel není přihlášený - nečtu z cloudu');
+    return;
+  }
+  
+  console.log('Načítám data z cloudu pro uživatele:', currentUser.uid);
+  
+  try {
+    // Načti pracovní data
+    const doc = await db.collection('workHours').doc(currentUser.uid).get();
+    if (doc.exists) {
+      const data = doc.data();
+      console.log('Načtená data z cloudu:', data);
+      
+      zaznamy = data.zaznamy || [];
+      limitHodin = data.limitHodin || 0;
+      aktualniFiltr = data.aktualniFiltr || null;
+      
+      // Update UI
+      document.getElementById("limit").value = limitHodin;
+      if (aktualniFiltr) {
+        document.getElementById("filtrMesic").value = aktualniFiltr;
+      }
+      
+      console.log('Data úspěšně načtena z cloudu');
+    } else {
+      console.log('Dokument neexistuje - začínám s prázdnými daty');
+      zaznamy = [];
+      limitHodin = 0;
+      aktualniFiltr = null;
+    }
+    
+    // PŘIDEJ: Načti nastavení uživatele (sazba, DPH)
+    const userDoc = await db.collection('users').doc(currentUser.uid).get();
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+      
+      if (userData.hodinovaSazba !== undefined) {
+        hodinovaSazba = userData.hodinovaSazba;
+        document.getElementById('hodinovaSazba').value = hodinovaSazba;
+      }
+      
+      if (userData.danoveZatizeni !== undefined) {
+        danoveZatizeni = userData.danoveZatizeni;
+        document.getElementById('danoveZatizeni').value = danoveZatizeni;
+      }
+      
+      console.log(`Nastavení načteno: ${hodinovaSazba} Kč/h, ${danoveZatizeni}% daň`);
+    }
+    
+    aktualizovatZobrazeni();
+    
+  } catch (error) {
+    console.error('Chyba při načítání dat z cloudu:', error);
+    console.error('Error code:', error.code);
+    console.error('Error message:', error.message);
+    
+    // Fallback na local storage
+    console.log('Fallback na lokální úložiště');
+    nactiData(); 
+    
+    // Načti sazbu z localStorage jako fallback
+    const savedSazba = localStorage.getItem('hodinovaSazba');
+    const savedDan = localStorage.getItem('danoveZatizeni');
+    
+    if (savedSazba) {
+      hodinovaSazba = parseFloat(savedSazba);
+      document.getElementById('hodinovaSazba').value = hodinovaSazba;
+    }
+    
+    if (savedDan) {
+      danoveZatizeni = parseFloat(savedDan);
+      document.getElementById('danoveZatizeni').value = danoveZatizeni;
+    }
+    
+    updateVydelekDisplay();
+  }
+};
+
+// ===== POMOCNÉ FUNKCE =====
+
+// Vylepšená funkce pro kopírování data
+const originalPouzitSejneDatum = pouzitSejneDatum;
+pouzitSejneDatum = function() {
+  const odInput = document.getElementById('od');
+  const doInput = document.getElementById('do');
+  
+  if (!odInput.value) {
+    zobrazitNotifikaci('Nejprve vyplňte pole "Od"', 'warning');
+    odInput.focus(); // Přidej focus pro lepší UX
+    return;
+  }
+  
+  const odValue = odInput.value;
+  const rokMesicDen = odValue.split('T')[0];
+  
+  if (doInput.value) {
+    // Zachovej existující čas
+    const existujiciCas = doInput.value.split('T')[1];
+    doInput.value = rokMesicDen + 'T' + existujiciCas;
+  } else {
+    // Nastav rozumný výchozí čas (např. o hodinu později)
+    const casOd = odValue.split('T')[1];
+    if (casOd) {
+      const [hodiny, minuty] = casOd.split(':').map(Number);
+      const novaHodina = String(hodiny + 1).padStart(2, '0');
+      doInput.value = rokMesicDen + 'T' + novaHodina + ':' + String(minuty).padStart(2, '0');
+    } else {
+      doInput.value = rokMesicDen + 'T00:00';
+    }
+  }
+  
+  console.log('Datum zkopírováno:', rokMesicDen);
+  zobrazitNotifikaci(`Datum zkopírováno: ${rokMesicDen}`, 'info');
+  doInput.focus(); // Přesun focus na pole "Do"
+};
+
+// Vylepšená funkce exportu - přidá výdělek do exportu
+const originalExportovat = exportovat;
+exportovat = function() {
+  if (zaznamy.length === 0) {
+    zobrazitNotifikaci("Žádné záznamy k exportu", 'warning');
+    return;
+  }
+
+  const data = filtrujZaznamy();
+  const celkemHodin = data.reduce((s, z) => s + z.hodin, 0);
+  
+  let obsah = "Evidence pracovních hodin\n";
+  obsah += "========================\n\n";
+  
+  // Přidej informace o výdělku na začátek
+  if (hodinovaSazba > 0) {
+    const hruby = celkemHodin * hodinovaSazba;
+    const cisty = hruby * (1 - danoveZatizeni / 100);
+    obsah += `VÝDĚLEK:\n`;
+    obsah += `Sazba: ${hodinovaSazba} Kč/hod\n`;
+    obsah += `Daň: ${danoveZatizeni}%\n`;
+    obsah += `Hrubý výdělek: ${Math.round(hruby)} Kč\n`;
+    obsah += `Čistý výdělek: ${Math.round(cisty)} Kč\n\n`;
+  }
+  
+  obsah += "Záznamy:\n\n";
+
+  data.forEach((z, index) => {
+    const odFormatted = z.odRaw.slice(0, 16);
+    const doFormatted = z.doRaw.slice(0, 16);
+    obsah += `${index + 1}. ${odFormatted} | ${doFormatted}\n`;
+  });
+
+  obsah += `\nCELKEM: ${celkemHodin.toFixed(4)}\n`;
+  obsah += `CELKEM (formátováno): ${formatHHMM(celkemHodin)}\n`;
+  
+  if (limitHodin > 0) {
+    obsah += `LIMIT: ${formatHHMM(limitHodin)}\n`;
+    const zbyvajici = Math.max(0, limitHodin - celkemHodin);
+    obsah += `ZBÝVÁ: ${formatHHMM(zbyvajici)}\n`;
+  }
+  
+  if (aktualniFiltr) {
+    obsah += `\nFILTR: ${aktualniFiltr}\n`;
+  }
+  
+  const exportTime = new Date();
+  obsah += `\nExportováno: ${exportTime.toLocaleString('cs-CZ')} (${Intl.DateTimeFormat().resolvedOptions().timeZone})\n`;
+  obsah += `© 2025 Marv140 - Software accessible at https://marv140.github.io/\n`;
+
+  const blob = new Blob([obsah], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  
+  const today = new Date();
+  const dateString = today.getFullYear() + '-' + 
+    String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+    String(today.getDate()).padStart(2, '0');
+  
+  a.download = `pracovni_hodiny_${dateString}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  zobrazitNotifikaci(`Export dokončen: ${data.length} záznamů (${formatHHMM(celkemHodin)})`, 'success', 4000);
+  console.log(`Export dokončen: ${data.length} záznamů, ${formatHHMM(celkemHodin)} hodin`);
+};
+
+// Přidej popup pro potvrzení smazání sazby
+function zobrazitSmazatSazbuPopup() {
+  const popup = document.createElement('div');
+  popup.id = 'smazatSazbuPopup';
+  popup.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+  popup.innerHTML = `
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+      <div class="text-center">
+        <div class="w-12 h-12 mx-auto mb-4 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">Smazat sazbu?</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          Opravdu chcete smazat nastavenou hodinovou sazbu a daňové zatížení?<br>
+          <strong>Tato akce je nevratná</strong> a smaže data jak z cloudu, tak z místního úložiště.
+        </p>
+        <div class="bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded-lg p-3 mb-4">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+            <span class="text-sm text-yellow-800 dark:text-yellow-200">
+              <strong>Varování:</strong> Tato akce je nevratná!
+            </span>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="potvrzitSmazaniSazby()" 
+                  class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition font-medium">
+            Ano, smazat sazbu
+          </button>
+          <button onclick="zavritSmazatSazbuPopup()" 
+                  class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-2 px-4 rounded transition">
+            Zrušit
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(popup);
+  
+  // Přidej event listener pro zavření při kliknutí na overlay
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      zavritSmazatSazbuPopup();
+    }
+  });
+}
+
+function zavritSmazatSazbuPopup() {
+  const popup = document.getElementById('smazatSazbuPopup');
+  if (popup) {
+    popup.remove();
+  }
+}
+
+async function potvrzitSmazaniSazby() {
+  // Reset hodnot
+  hodinovaSazba = 0;
+  danoveZatizeni = 21;
+  
+  // Vyčisti input fieldy
+  document.getElementById('hodinovaSazba').value = '';
+  document.getElementById('danoveZatizeni').value = 21;
+  
+  // Smaž z Firebase
+  if (currentUser) {
+    try {
+      await db.collection('users').doc(currentUser.uid).update({
+        hodinovaSazba: firebase.firestore.FieldValue.delete(),
+        danoveZatizeni: firebase.firestore.FieldValue.delete(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      console.log('Sazba smazána z cloudu');
+    } catch (error) {
+      console.error('Chyba při mazání sazby z cloudu:', error);
+      zobrazitNotifikaci('Chyba při mazání z cloudu, data smazána lokálně', 'warning');
+    }
+  }
+  
+  // Smaž z localStorage
+  localStorage.removeItem('hodinovaSazba');
+  localStorage.removeItem('danoveZatizeni');
+  
+  updateVydelekDisplay();
+  zavritSmazatSazbuPopup();
+  zobrazitNotifikaci('Sazba byla smazána', 'success');
+}
+
+// Změň onclick v HTML na zobrazitSmazatSazbuPopup()
+function smazatSazbu() {
+  zobrazitSmazatSazbuPopup();
+}
+
+console.log('✅ Earnings module loaded successfully');

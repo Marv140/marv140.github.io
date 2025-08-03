@@ -302,6 +302,63 @@
           </div>
         </div>
 
+        <!-- Earnings Section -->
+        <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <h3 class="text-lg font-semibold mb-4">Výdělek</h3>
+          
+          <!-- Hourly Rate Setting -->
+          <div class="mb-4 p-4 bg-white dark:bg-gray-600 rounded-lg">
+            <div class="flex flex-wrap gap-4 items-end">
+              <div class="flex-1 min-w-48">
+                <label for="hodinovaSazba" class="block font-semibold mb-2">Hodinová sazba (Kč):</label>
+                <input type="number" 
+                       id="hodinovaSazba" 
+                       step="0.01" 
+                       placeholder="např. 300"
+                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 h-10"/>
+              </div>
+              <div class="flex-1 min-w-48">
+                <label for="danoveZatizeni" class="block font-semibold mb-2">Daňové zatížení (%):</label>
+                <input type="number" 
+                       id="danoveZatizeni" 
+                       step="0.1" 
+                       placeholder="např. 21"
+                       value="21"
+                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 h-10"/>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="nastavitSazbu()" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 rounded transition h-10">
+                  Nastavit
+                </button>
+                <button onclick="smazatSazbu()" 
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 rounded transition h-10">
+                  Smazat
+                </button>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Sazba se uloží do cloudu a bude použita pro výpočet výdělku</p>
+          </div>
+
+          <!-- Earnings Display -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white dark:bg-gray-600 p-4 rounded-lg">
+              <div class="font-semibold text-gray-600 dark:text-gray-300 mb-2">Hrubý výdělek:</div>
+              <div class="text-2xl font-bold text-green-600 dark:text-green-400" id="hrubyVydelek">0 Kč</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <span id="aktualniSazba">0 Kč/hod</span> × <span id="celkemHodinVydelek">0 hod</span>
+              </div>
+            </div>
+            <div class="bg-white dark:bg-gray-600 p-4 rounded-lg">
+              <div class="font-semibold text-gray-600 dark:text-gray-300 mb-2">Čistý výdělek:</div>
+              <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400" id="cistyVydelek">0 Kč</div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Po odečtení <span id="aktualniDan">21%</span> daně
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Chart Section -->
         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg text-center">
           <h3 class="text-lg font-semibold mb-4">Graf hodin</h3>
@@ -314,11 +371,11 @@
               Exportovat graf
             </button>
             <!-- Debug button - only show when logged in -->
-            <button onclick="testFirebaseConnection()" 
+            <!-- <button onclick="testFirebaseConnection()" 
                     id="debugButton"
                     class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded transition">
               Test Firebase
-            </button>
+            </button> -->
           </div>
         </div>
 
