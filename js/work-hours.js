@@ -749,7 +749,7 @@ function zobrazitZaznamDeletePopup(index) {
         <strong>${odCas} - ${doCas}</strong> (${formatHHMM(zaznam.hodin)})?
       </p>
       <div class="flex gap-3">
-        <button onclick="potvrzitSmazani(${index})" 
+        <button onclick="potvrditSmazani(${index})" 
                 class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition">
           Ano, smazat
         </button>
@@ -771,7 +771,7 @@ function zobrazitZaznamDeletePopup(index) {
   });
 }
 
-function potvrzitSmazani(index) {
+function potvrditSmazani(index) {
   zaznamy.splice(index, 1);
   universalSave();
   aktualizovatZobrazeni();
@@ -941,7 +941,7 @@ function zobrazitSmazatVsechnyZaznamyPopup() {
         </div>
       </div>
       <div class="flex gap-3">
-        <button onclick="potvrzitSmazaniVsech()" 
+        <button onclick="potvrditSmazaniVsech()" 
                 class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition font-medium">
           Ano, smazat vše
         </button>
@@ -964,7 +964,7 @@ function zobrazitSmazatVsechnyZaznamyPopup() {
 }
 
 // Confirm delete all records
-function potvrzitSmazaniVsechZaznamu() {
+function potvrditSmazaniVsechZaznamu() {
   const pocetZaznamu = zaznamy.length;
   zaznamy = [];
   universalSave();
@@ -1170,7 +1170,7 @@ function zobrazitNotifikaci2(zprava, typ = 'info', delka = 3000) {
   }
 }
 
-function potvrzitSmazaniVsech() {
+function potvrditSmazaniVsech() {
   const pocetZaznamu = zaznamy.length;
   zaznamy = [];
   universalSave();
@@ -1387,7 +1387,7 @@ function zobrazitSmazatSazbuPopup() {
           </div>
         </div>
         <div class="flex gap-3">
-          <button onclick="potvrzitSmazaniSazby()" 
+          <button onclick="potvrditSmazaniSazby()" 
                   class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition font-medium">
             Ano, smazat sazbu
           </button>
@@ -1416,7 +1416,7 @@ function zavritSmazatSazbuPopup() {
   }
 }
 
-async function potvrzitSmazaniSazby() {
+async function potvrditSmazaniSazby() {
   // Reset hodnot
   hodinovaSazba = 0;
   danovaSazba = 21;
