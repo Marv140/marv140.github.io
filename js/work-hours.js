@@ -1419,11 +1419,11 @@ function pouzitSejneDatum() {
 }
 
 let hodinovaSazba = 0;
-let danoveZatizeni = 21;
+let danovaSazba = 21;
 
 async function nastavitSazbu() {
   const sazbaInput = document.getElementById('hodinovaSazba');
-  const danInput = document.getElementById('danoveZatizeni');
+  const danInput = document.getElementById('danovaSazba');
   
   const novaSazba = parseFloat(sazbaInput.value) || 0;
   const novaDan = parseFloat(danInput.value) || 21;
@@ -1440,14 +1440,14 @@ async function nastavitSazbu() {
   }
   
   hodinovaSazba = novaSazba;
-  danoveZatizeni = novaDan;
+  danovaSazba = novaDan;
   
   // Uložení do Firebase - použij set s merge: true
   if (currentUser) {
     try {
       await db.collection('users').doc(currentUser.uid).set({
         hodinovaSazba: hodinovaSazba,
-        danoveZatizeni: danoveZatizeni,
+        danovaSazba: danovaSazba,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true });
       console.log('Sazba uložena do cloudu');
@@ -1459,10 +1459,10 @@ async function nastavitSazbu() {
   
   // Záložní uložení do localStorage
   localStorage.setItem('hodinovaSazba', hodinovaSazba.toString());
-  localStorage.setItem('danoveZatizeni', danoveZatizeni.toString());
+  localStorage.setItem('danovaSazba', danovaSazba.toString());
   
   updateVydelekDisplay();
-  zobrazitNotifikaci(`Sazba nastavena: ${hodinovaSazba} Kč/hod, daň ${danoveZatizeni}%`, 'success');
+  zobrazitNotifikaci(`Sazba nastavena: ${hodinovaSazba} Kč/hod, daň ${danovaSazba}%`, 'success');
 }
 
 function updateVydelekDisplay() {
@@ -1488,14 +1488,14 @@ function updateVydelekDisplay() {
   
   const celkemHodin = celkemMinut / 60;
   const hruby = celkemHodin * hodinovaSazba;
-  const cisty = hruby * (1 - danoveZatizeni / 100);
+  const cisty = hruby * (1 - danovaSazba / 100);
   
   // Bezpečná aktualizace DOM elementů
   updateElementSafely('hrubyVydelek', `${Math.round(hruby)} Kč`);
   updateElementSafely('cistyVydelek', `${Math.round(cisty)} Kč`);
   updateElementSafely('aktualniSazba', `${hodinovaSazba} Kč/hod`);
   updateElementSafely('celkemHodinVydelek', `${celkemHodin.toFixed(1)} hod`);
-  updateElementSafely('aktualniDan', `${danoveZatizeni}%`);
+  updateElementSafely('aktualniDan', `${danovaSazba}%`);
 
   console.log(`Výdělek: ${celkemHodin.toFixed(1)}h × ${hodinovaSazba}Kč/h = ${Math.round(hruby)}Kč hrubý, ${Math.round(cisty)}Kč čistý`);
 }
@@ -1523,10 +1523,10 @@ async function loadUserSettings() {
         if (sazbaInput) sazbaInput.value = hodinovaSazba;
       }
       
-      if (data.danoveZatizeni !== undefined) {
-        danoveZatizeni = data.danoveZatizeni;
-        const danInput = document.getElementById('danoveZatizeni');
-        if (danInput) danInput.value = danoveZatizeni;
+      if (data.danovaSazba !== undefined) {
+        danovaSazba = data.danovaSazba;
+        const danInput = document.getElementById('danovaSazba');
+        if (danInput) danInput.value = danovaSazba;
       }
       
       // Načtení limitu
@@ -1536,14 +1536,14 @@ async function loadUserSettings() {
         if (limitInput) limitInput.value = limitHodin;
       }
       
-      console.log(`Nastavení načteno: ${hodinovaSazba} Kč/h, ${danoveZatizeni}% daň, ${limitHodin}h limit`);
+      console.log(`Nastavení načteno: ${hodinovaSazba} Kč/h, ${danovaSazba}% daň, ${limitHodin}h limit`);
     }
   } catch (error) {
     console.error('Cloud nedostupný, načítám z localStorage:', error);
     
     // Fallback na localStorage
     const savedSazba = localStorage.getItem('hodinovaSazba');
-    const savedDan = localStorage.getItem('danoveZatizeni');
+    const savedDan = localStorage.getItem('danovaSazba');
     
     if (savedSazba) {
       hodinovaSazba = parseFloat(savedSazba);
@@ -1552,9 +1552,9 @@ async function loadUserSettings() {
     }
     
     if (savedDan) {
-      danoveZatizeni = parseFloat(savedDan);
-      const danInput = document.getElementById('danoveZatizeni');
-      if (danInput) danInput.value = danoveZatizeni;
+      danovaSazba = parseFloat(savedDan);
+      const danInput = document.getElementById('danovaSazba');
+      if (danInput) danInput.value = danovaSazba;
     }
   }
   
@@ -1642,12 +1642,12 @@ nactiDataZCloudu = async function() {
         document.getElementById('hodinovaSazba').value = hodinovaSazba;
       }
       
-      if (userData.danoveZatizeni !== undefined) {
-        danoveZatizeni = userData.danoveZatizeni;
-        document.getElementById('danoveZatizeni').value = danoveZatizeni;
+      if (userData.danovaSazba !== undefined) {
+        danovaSazba = userData.danovaSazba;
+        document.getElementById('danovaSazba').value = danovaSazba;
       }
       
-      console.log(`Nastavení načteno: ${hodinovaSazba} Kč/h, ${danoveZatizeni}% daň`);
+      console.log(`Nastavení načteno: ${hodinovaSazba} Kč/h, ${danovaSazba}% daň`);
     }
     
     aktualizovatZobrazeni();
@@ -1663,7 +1663,7 @@ nactiDataZCloudu = async function() {
     
     // Načti sazbu z localStorage jako fallback
     const savedSazba = localStorage.getItem('hodinovaSazba');
-    const savedDan = localStorage.getItem('danoveZatizeni');
+    const savedDan = localStorage.getItem('danovaSazba');
     
     if (savedSazba) {
       hodinovaSazba = parseFloat(savedSazba);
@@ -1671,8 +1671,8 @@ nactiDataZCloudu = async function() {
     }
     
     if (savedDan) {
-      danoveZatizeni = parseFloat(savedDan);
-      document.getElementById('danoveZatizeni').value = danoveZatizeni;
+      danovaSazba = parseFloat(savedDan);
+      document.getElementById('danovaSazba').value = danovaSazba;
     }
     
     updateVydelekDisplay();
@@ -1734,10 +1734,10 @@ exportovat = function() {
   // Přidej informace o výdělku na začátek
   if (hodinovaSazba > 0) {
     const hruby = celkemHodin * hodinovaSazba;
-    const cisty = hruby * (1 - danoveZatizeni / 100);
+    const cisty = hruby * (1 - danovaSazba / 100);
     obsah += `VÝDĚLEK:\n`;
     obsah += `Sazba: ${hodinovaSazba} Kč/hod\n`;
-    obsah += `Daň: ${danoveZatizeni}%\n`;
+    obsah += `Daň: ${danovaSazba}%\n`;
     obsah += `Hrubý výdělek: ${Math.round(hruby)} Kč\n`;
     obsah += `Čistý výdělek: ${Math.round(cisty)} Kč\n\n`;
   }
@@ -1846,18 +1846,18 @@ function zavritSmazatSazbuPopup() {
 async function potvrzitSmazaniSazby() {
   // Reset hodnot
   hodinovaSazba = 0;
-  danoveZatizeni = 21;
+  danovaSazba = 21;
   
   // Vyčisti input fieldy
   document.getElementById('hodinovaSazba').value = '';
-  document.getElementById('danoveZatizeni').value = 21;
+  document.getElementById('danovaSazba').value = 21;
   
   // Smaž z Firebase
   if (currentUser) {
     try {
       await db.collection('users').doc(currentUser.uid).update({
         hodinovaSazba: firebase.firestore.FieldValue.delete(),
-        danoveZatizeni: firebase.firestore.FieldValue.delete(),
+        danovaSazba: firebase.firestore.FieldValue.delete(),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       });
       console.log('Sazba smazána z cloudu');
@@ -1869,7 +1869,7 @@ async function potvrzitSmazaniSazby() {
   
   // Smaž z localStorage
   localStorage.removeItem('hodinovaSazba');
-  localStorage.removeItem('danoveZatizeni');
+  localStorage.removeItem('danovaSazba');
   
   updateVydelekDisplay();
   zavritSmazatSazbuPopup();
