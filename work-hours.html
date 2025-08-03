@@ -175,16 +175,16 @@
                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 h-10"/>
             </div>
             <button onclick="pouzitSejneDatum()" 
-                    class="bg-purple-600 hover:bg-purple-500 text-white px-4 rounded transition h-10 whitespace-nowrap">
+                    class="bg-purple-600 hover:bg-purple-700 text-white px-4 rounded transition h-10 whitespace-nowrap">
               Stejné datum
             </button>
             <button onclick="pridatZaznam()" 
                     id="pridatBtn" 
-                    class="bg-green-600 hover:bg-green-500 text-white px-4 rounded transition h-10">
+                    class="bg-green-600 hover:bg-green-700 text-white px-4 rounded transition h-10">
               Přidat
             </button>
             <button onclick="exportovat()" 
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 rounded transition h-10">
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded transition h-10">
               Exportovat TXT
             </button>
           </div>
@@ -201,7 +201,7 @@
                        accept=".txt" 
                        onchange="importovat(this)" 
                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"/>
-                <div class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 h-10 flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-500 transition">
+                <div class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 h-10 flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                   <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                   </svg>
@@ -237,7 +237,7 @@
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Zadejte jedno číslo v hodinách (např. 40 pro 40 hodin)</p>
             </div>
             <button onclick="nastavitLimit()" 
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 rounded transition h-10 self-start mt-8">
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded transition h-10 self-start mt-8">
               Nastavit
             </button>
           </div>
@@ -253,11 +253,11 @@
                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200 h-10"/>
             </div>
             <button onclick="aplikovatFiltr()" 
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 rounded transition h-10">
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded transition h-10">
               Filtrovat
             </button>
             <button onclick="zrusitFiltr()" 
-                    class="bg-gray-600 hover:bg-gray-500 text-white px-4 rounded transition h-10">
+                    class="bg-red-600 hover:bg-red-700 text-white px-4 rounded transition h-10">
               Zrušit filtr
             </button>
           </div>
@@ -294,9 +294,6 @@
             </h3>
             <button onclick="zobrazitSmazatVsechnyPopup()" 
                     class="bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded text-sm font-medium transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-              </svg>
               Smazat vše
             </button>
           </div>
@@ -313,13 +310,13 @@
           </div>
           <div class="flex gap-2 justify-center flex-wrap">
             <button onclick="exportGraf()" 
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-4 rounded transition">
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded transition">
               Exportovat graf
             </button>
             <!-- Debug button - only show when logged in -->
             <button onclick="testFirebaseConnection()" 
                     id="debugButton"
-                    class="bg-purple-600 hover:bg-purple-500 text-white py-2 px-4 rounded transition">
+                    class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded transition">
               Test Firebase
             </button>
           </div>
