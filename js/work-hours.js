@@ -161,8 +161,9 @@ function universalSave() {
 
 // Format hours in HH:MM format
 function formatHHMM(hodin) {
-  const h = Math.floor(hodin);
-  const m = Math.round((hodin - h) * 60);
+  const celkemMinut = Math.round(hodin * 60);
+  const h = Math.floor(celkemMinut / 60);
+  const m = celkemMinut % 60;
   return `${h}:${String(m).padStart(2, "0")}`;
 }
 
