@@ -1,53 +1,14 @@
 <!DOCTYPE html>
 <html lang="cs">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Marv140 - Projects</title>
-  <!-- 0) Configure Tailwind to use .dark class -->
-  <script>tailwind.config = { darkMode: 'class' }</script>
-  <!-- 1) Set initial theme BEFORE loading Tailwind -->
-  <script>
-    (function() {
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const dark = stored === 'dark' || (!stored && prefersDark);
-      document.documentElement.classList.toggle('dark', dark);
-    })();
-  </script>
-  <!-- 2) Load Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="32x32" />
-</head>
-<body class="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
-  <div class="flex-1 flex flex-col items-center justify-center">
-    <h1 class="text-4xl font-bold mb-8">My Projects</h1>
-    <!-- replace grid with a flex-wrap container that stays centered -->
-    <div class="flex flex-wrap justify-center gap-6 max-w-4xl w-full px-4">
-      <a href="https://marv140.github.io/excel-comp.html"
-         title="Compare two Excel files"
-         class="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition">
-        Excel Comparator
-      </a>
-      <a href="https://marv140.github.io/img-to-webp.html"
-         title="JPG/PNG to WEBP converter"
-         class="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition">
-        JPG/PNG to WEBP
-      </a>
-      <a href="https://marv140.github.io/motol-projects.html"
-         title="School project"
-         class="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition">
-        Motol Projects
-      </a>
-      <a href="https://marv140.github.io/work-hours.html"
-         title="Just count how many hours you worked"
-         class="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition">
-        Work hours
-      </a>
-    </div>
-  </div>
-  <footer class="text-center py-6 text-gray-500">
-    &copy; 2025 Marv140. All rights reserved.
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marv140 Portfolio</title>
+    <script type="module" crossorigin src="/assets/index-UDUahTq5.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DZelsp5T.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
