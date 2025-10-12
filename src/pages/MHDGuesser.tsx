@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Bus, Maximize, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import MHD_IMAGES from '../data/mhd_images';
+import MHD_IMAGES from '../../js/mhd_images';
 
 interface MHDImage {
   city: string;
